@@ -1,6 +1,6 @@
-This is Python code. 
-It allows me to get a list of all of the IDs of the followers of a particular sports team.
-I then manually save the list of IDs as a .txt file for my Intersection code
+#This is Python code. 
+#It allows me to get a list of all of the IDs of the followers of a particular sports team.
+#I then manually save the list of IDs as a .txt file for my Intersection code
 
 import tweepy
 import time
