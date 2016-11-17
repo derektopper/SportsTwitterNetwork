@@ -1,0 +1,40 @@
+import tweepy
+import time
+import csv
+import oauth2
+import json
+
+consumer_key = Private
+consumer_secret = Private
+access_token = Private
+access_token_secret = Private
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+api = tweepy.API(auth)
+#This sets up keys
+consumer = oauth2.Consumer(key=consumer_key, secret=consumer_secret)
+token = oauth2.Token(key=access_token, secret=access_token_secret)
+client = oauth2.Client(consumer, token)
+
+#prints a list of the ids of the followers of a team
+
+allteamids = []
+
+def get_next_cursor(teamaccount, cursor = -1):
+    timeline_endpoint = "https://api.twitter.com/1.1/followers/ids.json?cursor="+ str(cursor) +"&screen_name="+ str(teamaccount) +"&count=5000"
+    response, data = client.request(timeline_endpoint)
+    loader = json.loads(data)
+    allids = loader['ids']
+    allteamids.append(allids)
+    nc = loader['next_cursor']
+    #The next line is optional but enables one to restart if the rate limit is hit.
+    print(nc)
+    if nc is not 0:
+        time.sleep(61)
+        get_next_cursor(teamaccount, nc)
+        
+get_next_cursor('TWITTER HANDLE OF TEAM (No @)')
+
+print(allteamids)
