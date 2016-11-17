@@ -23,6 +23,7 @@ token = oauth2.Token(key=access_token, secret=access_token_secret)
 client = oauth2.Client(consumer, token)
 
 #prints a list of the ids of the followers of a team
+#This prints 5,000 followers each minute, but can be modified to print 75,000 followers at once.
 
 allteamids = []
 
